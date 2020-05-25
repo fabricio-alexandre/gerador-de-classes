@@ -12,7 +12,7 @@
     <fieldset>
       <legend>Acesso ao banco de dados</legend>
       <input type="text" name="host" placeholder="Host" value="localhost"><br>
-      <input type="text" name="porta" placeholder="Porta" value="3306"><br>
+      <input type="text" name="port" placeholder="Porta" value="3306"><br>
       <input type="text" name="user" placeholder="Usuário"><br>
       <input type="text" name="pass" placeholder="Senha"><br>
       <input type="text" name="dbName" placeholder="Banco"><br>
