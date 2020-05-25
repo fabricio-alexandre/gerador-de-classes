@@ -49,7 +49,15 @@ class Database {
    */
   private $dbName = null;
   
-  
+  /**
+   * Construtor da classe
+   * @method __construct
+   * @param string  $host
+   * @param string  $port
+   * @param string  $user
+   * @param string  $pass
+   * @param string  $dbName
+   */
   public function __construct($host, $port, $user, $pass, $dbName){
     $this->host   = $host;
     $this->port   = $port;
@@ -57,22 +65,14 @@ class Database {
     $this->pass   = $pass;
     $this->dbName = $dbName;
     return $this;
-    // if (!$this->conexao instanceOf \PDO) {
-    //   try {
-    //     $porta = strlen($port) ? ';port='.$port : null;
-    //     $dsn = 'mysql:host='.$host.';dbname='.$dbName.$porta.';charset=utf8';
-    //     $options = [
-    //       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    //       PDO::ATTR_PERSISTENT => true
-    //     ];
-
-    //     $this->conexao = new PDO($dsn, $user, $pass, $options);
-    //   } catch (\PDOException $e) {
-    //     echo 'Erro de conexão: ' . $e->getMessage();
-    //   }
-    // }
   }
 
+
+  /**
+   * Responsavel pela conexao com o banco de dados
+   * @method connect
+   * @return PDO
+   */
   public function connect(){
     try {
       $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbName.';port='.$this->port.';charset=utf8';
@@ -87,6 +87,12 @@ class Database {
   }
 
 
+  /**
+   * Executa uma query no banco de dados
+   * @method query
+   * @param  string $query
+   * @return PDOStatement
+   */
   public function query($query){
     $connect = $this->connect();
     try{
@@ -103,6 +109,12 @@ class Database {
   }
 
 
+  /**
+   * Obtem os detalhes de uma tabela
+   * @method getTableDetails
+   * @param  array  $tables
+   * @return array
+   */
   public function getTableDetails(array $tables){
     $return = [];
     foreach ($tables as $key => $table) {
@@ -117,10 +129,17 @@ class Database {
   }
 
 
+  /**
+   * Retorna os detalhes de uma coluna
+   * @method getColumnDetails
+   * @param  string  $tableName
+   * @return array
+   */
   public function getColumnDetails($tableName){
     $query = 'SELECT 
               a.TABLE_NAME AS "table",
               a.COLUMN_NAME AS "column", 
+              a.DATA_TYPE AS "dataType", 
               a.COLUMN_COMMENT AS "comment"
               FROM information_schema.`COLUMNS` a
               WHERE a.TABLE_SCHEMA = "'.$this->dbName.'" AND a.TABLE_NAME = "'.$tableName.'"';
