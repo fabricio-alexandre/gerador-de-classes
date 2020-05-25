@@ -3,6 +3,10 @@
 
 <head>
   <title>Gerador de classes</title>
+
+  <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+  <script src="js/jquery-3.5.1.js"></script>
+  <script src="js/scripts.js"></script>
 </head>
 
 <body>
@@ -13,7 +17,7 @@
 
     <fieldset>
       <legend>Acesso ao banco de dados</legend>
-      <input type="text" name="host" placeholder="Host" value="localhost"><br>
+      <input type="text" name="host" placeholder="Host"><br>
       <input type="text" name="port" placeholder="Porta" value="3306"><br>
       <input type="text" name="user" placeholder="Usuário"><br>
       <input type="text" name="pass" placeholder="Senha"><br>
@@ -24,25 +28,37 @@
       <legend>Outras informações</legend>
       <input type="text" name="author" placeholder="Autor" value=""><br>
       <input type="text" name="package" placeholder="Pacote" value=""><br>
+
+      <span>Utilizar extensão ".class"?</span>
+      <label>
+        <input type="radio" name="extensionClass" value="s" checked>
+        <span>Sim</span>
+      </label>
+      <label>
+        <input type="radio" name="extensionClass" value="n">
+        <span>Não</span>
+      </label>
     </fieldset>
 
     <h2>Tabelas</h2>
 
     <div class="boxTabelas">
-      <fieldset class="boxTabela">
-        <legend>Tabela</legend>
-        <input type="text" name="tabelas[0][name]" placeholder="Nome" value=""><br>
-        <input type="text" name="tabelas[0][description]" placeholder="Descrição" value=""><br>
-      </fieldset>
-
-      <fieldset class="boxClasse">
-        <legend>Tabela</legend>
-        <input type="text" name="tabelas[1][name]" placeholder="Nome" value=""><br>
-        <input type="text" name="tabelas[1][description]" placeholder="Descrição" value=""><br>
-      </fieldset>
+      <!-- Preenchido pelo usuario -->
     </div>
 
-    <br>
-    <button>Gerar classes</button>
+    <br><button type="button" class="btnClass btnAdd">+ Classe</button>
+
+    <br><br><br>
+    <button class="btnBuildClasses">Gerar classes</button>
   </form>
+
+
+  <div class="modeloBoxTabela" hidden>
+    <fieldset>
+      <legend>Tabela</legend>
+      <input type="text" name="tables[name][]" placeholder="Nome" value=""><br>
+      <input type="text" name="tables[description][]" placeholder="Descrição" value=""><br>
+    </fieldset>
+  </div>
+  
 </body>

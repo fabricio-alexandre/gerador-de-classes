@@ -1,0 +1,28 @@
+input[type=text] {
+  min-width: 400px;
+}
+fieldset {
+  margin-top: 10px;
+}
+.btnClass {
+  border: 0;
+  height: 30px;
+  width: 90px;
+  border-radius: 3px;
+}
+.btnAdd {
+  background: black;
+  color: white;
+}
+.btnRemove {
+  background: #777;
+  color: white;
+}
+.btnBuildClasses{
+  background: green;
+  color: white;
+  border: 0;
+  height: 40px;
+  width: 130px;
+  border-radius: 3px;
+}

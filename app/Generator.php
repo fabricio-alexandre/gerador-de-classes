@@ -70,10 +70,11 @@ class Generator {
    * @param  array   $tableDetails
    * @param  string  $package
    * @param  string  $author
+   * @param  bool    $addExtension
    * @return string
    */
-  public function buildClass(array $tableDetails, $package, $author){
-    $this->setAttributes($tableDetails, $package, $author)
+  public function buildClass(array $tableDetails, $package, $author, $addExtension = false){
+    $this->setAttributes($tableDetails, $package, $author, $addExtension)
          ->buildHeader()
          ->buildBeginClass()
          ->buildProperties()
@@ -90,16 +91,18 @@ class Generator {
    * @param  array   $tableDetails
    * @param  string  $package
    * @param  string  $author
+   * @param  bool    $addExtension
    * @return this
    */
-  protected function setAttributes(array $tableDetails, $package, $author){
+  public function setAttributes(array $tableDetails, $package, $author, $addExtension = false){
     if (!self::validateData($tableDetails)) return self::setErro('Dados inválidos');
     $this->className   = $tableDetails['className'];
-    $this->filename    = self::PATH_OUTPUT.'/'.$this->className.'.php';
+    $this->filename    = $addExtension ? self::PATH_OUTPUT.'/'.$this->className.'.class.php' : self::PATH_OUTPUT.'/'.$this->className.'.php';
     $this->description = $tableDetails['description'];
     $this->properties  = $tableDetails['properties'];
     $this->package     = $package;
     $this->author      = $author;
+    return $this;
   }
 
 
@@ -148,7 +151,7 @@ class Generator {
    * @method buildHeader
    * @return this
    */
-  protected function buildHeader(){
+  public function buildHeader(){
     $fileTemplate = self::PATH_TEMPLATES.'/header';
     $this->validateFile($fileTemplate);
     
@@ -169,7 +172,7 @@ class Generator {
    * @method buildBeginClass
    * @return this
    */
-  protected function buildBeginClass(){
+  public function buildBeginClass(){
     $fileTemplate = self::PATH_TEMPLATES.'/begin-class';
     $this->validateFile($fileTemplate);
 
@@ -184,14 +187,15 @@ class Generator {
    * @method buildProperties
    * @return this
    */
-  protected function buildProperties(){
+  public function buildProperties(){
     $fileTemplate = self::PATH_TEMPLATES.'/property';
     $this->validateFile($fileTemplate);
 
     $content = file_get_contents($fileTemplate);
     foreach ($this->properties as $key => $property) {
       $var = [
-        'comment'  => $property->comment,
+        'comment'  => strlen($property->comment) ? $property->comment : 'Uncommented property',
+        'type'     => self::getTypeProperty($property),
         'property' => Funcoes::getCamelCase($property->column, '_'),
         'value'    => "null",
       ];
@@ -206,7 +210,7 @@ class Generator {
    * @method buildGetProperties
    * @return this
    */
-  protected function buildGetProperties(){
+  public function buildGetProperties(){
     $fileTemplate = self::PATH_TEMPLATES.'/get-properties';
     $this->validateFile($fileTemplate);
     $content = file_get_contents($fileTemplate);
@@ -232,7 +236,7 @@ class Generator {
    * @method buildEndClass
    * @return this
    */
-  protected function buildEndClass(){
+  public function buildEndClass(){
     $fileTemplate = self::PATH_TEMPLATES.'/end-class';
     $this->validateFile($fileTemplate);
 
@@ -249,6 +253,35 @@ class Generator {
    */
   public function setPermission(){
     chmod($this->filename, 0777);
+  }
+
+
+  /**
+   * Retorna o tipo da propriedade
+   * @method getTypeProperty
+   * @param  object $property
+   * @return string
+   */
+  public static function getTypeProperty(object $property){
+    $type = self::deparaTypes($property->dataType);
+    return ($property->dataType != 'enum') ? $type : ($type.' '.$property->columnType);
+  }
+
+
+  /**
+   * Faz o depara de tipos de dados
+   * @method deparaTypes
+   * @param  string  $dataType
+   * @return string
+   */
+  public static function deparaTypes($dataType){
+    $types = [
+      'varchar' => 'string',
+      'decimal' => 'float',
+      'double'  => 'float',
+      'enum'    => 'string',
+    ];
+    return $types[$dataType] ?? $dataType;
   }
 
 }

@@ -119,10 +119,13 @@ class Database {
     $return = [];
     foreach ($tables as $key => $table) {
       if (!isset($table['name']) or !isset($table['description'])) continue;
+      $columnDetails = $this->getColumnDetails($table['name']);
+      if (empty($columnDetails)) continue;
+
       $return[$key] = [
         'className'   => ucfirst(Funcoes::getCamelCase($table['name'], '_')),
         'description' => $table['description'],
-        'properties'  => $this->getColumnDetails($table['name'])
+        'properties'  => $columnDetails
       ];
     }
     return $return;
@@ -140,6 +143,7 @@ class Database {
               a.TABLE_NAME AS "table",
               a.COLUMN_NAME AS "column", 
               a.DATA_TYPE AS "dataType", 
+              a.COLUMN_TYPE AS "columnType", 
               a.COLUMN_COMMENT AS "comment"
               FROM information_schema.`COLUMNS` a
               WHERE a.TABLE_SCHEMA = "'.$this->dbName.'" AND a.TABLE_NAME = "'.$tableName.'"';
