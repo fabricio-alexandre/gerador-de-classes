@@ -98,7 +98,7 @@ class Database {
     try{
 			$connect->beginTransaction();
 			$result = $connect->query($query);
-			$connect->commit();
+      $connect->commit();
 		} catch (PDOException $e) {
       $connect->rollBack();
 			$result = NULL;

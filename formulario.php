@@ -50,6 +50,9 @@
 
     <br><br><br>
     <button class="btnBuildClasses">Gerar classes</button>
+
+    <br><br><br>
+    <a href="limpar-files.php">Limpar pasta de arquivos gerados</a>
   </form>
 
 

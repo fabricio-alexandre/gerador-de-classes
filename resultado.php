@@ -32,4 +32,6 @@ foreach ($database->getTableDetails($tables) as $key => $tableDetails) {
   $generatedFiles[] = $obGenerator->buildClass($tableDetails, $package, $author, $addExtension);
 }
 
-echo "<pre>Classes geradas: "; print_r($generatedFiles); echo "</pre>"; exit;
+$qtd = count($generatedFiles);
+$message = $qtd.' classes geradas';
+echo "<pre>".$message.": "; print_r($generatedFiles); echo "</pre>"; exit;
