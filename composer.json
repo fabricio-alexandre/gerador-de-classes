@@ -1,0 +1,13 @@
+{
+    "name": "fabricio-alexandre/gerador-de-classes",
+    "description": "Gerar classes automaticamente a partir das tabelas do banco de dados",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Fabricio Alexandre",
+            "email": "fabricio@wapstore.com.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
