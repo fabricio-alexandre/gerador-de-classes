@@ -6,9 +6,10 @@ fieldset {
 }
 .btnClass {
   border: 0;
-  height: 30px;
-  width: 90px;
+  height: 35px;
+  padding: 0 20px;
   border-radius: 3px;
+  cursor: pointer;
 }
 .btnAdd {
   background: black;
@@ -21,8 +22,8 @@ fieldset {
 .btnBuildClasses{
   background: green;
   color: white;
-  border: 0;
-  height: 40px;
-  width: 130px;
-  border-radius: 3px;
+}
+.btnRemoverArquivos{
+  background: red;
+  color: white;
 }

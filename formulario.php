@@ -49,12 +49,13 @@
     <br><button type="button" class="btnClass btnAdd">+ Classe</button>
 
     <br><br><br>
-    <button class="btnBuildClasses">Gerar classes</button>
-
-    <br><br><br>
-    <a href="limpar-files.php">Limpar pasta de arquivos gerados</a>
+    <button class="btnClass btnBuildClasses">Gerar classes</button>
   </form>
 
+  <br><br><br>
+  <a href="limpar-files.php">
+    <button class="btnClass btnRemoverArquivos">Limpar pasta de arquivos gerados</button>
+  </a>
 
   <div class="modeloBoxTabela" hidden>
     <fieldset>
