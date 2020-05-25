@@ -1,0 +1,10 @@
+
+	/**
+   * Responsável por retornar as propriedades da classe x Colunas do DB
+   * @method getProperties
+   */
+  public function getProperties(){
+    return [
+      {propertyList}
+    ];
+  }

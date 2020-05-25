@@ -9,6 +9,8 @@
   <h1>Gerador de classes</h1>
 
   <form method="POST">
+    <h2>Informações gerais</h2>
+
     <fieldset>
       <legend>Acesso ao banco de dados</legend>
       <input type="text" name="host" placeholder="Host" value="localhost"><br>
@@ -23,6 +25,22 @@
       <input type="text" name="author" placeholder="Autor" value=""><br>
       <input type="text" name="package" placeholder="Pacote" value=""><br>
     </fieldset>
+
+    <h2>Tabelas</h2>
+
+    <div class="boxTabelas">
+      <fieldset class="boxTabela">
+        <legend>Tabela</legend>
+        <input type="text" name="tabelas[0][name]" placeholder="Nome" value=""><br>
+        <input type="text" name="tabelas[0][description]" placeholder="Descrição" value=""><br>
+      </fieldset>
+
+      <fieldset class="boxClasse">
+        <legend>Tabela</legend>
+        <input type="text" name="tabelas[1][name]" placeholder="Nome" value=""><br>
+        <input type="text" name="tabelas[1][description]" placeholder="Descrição" value=""><br>
+      </fieldset>
+    </div>
 
     <br>
     <button>Gerar classes</button>
