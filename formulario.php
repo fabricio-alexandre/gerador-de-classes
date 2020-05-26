@@ -26,8 +26,8 @@
 
     <fieldset>
       <legend>Outras informações</legend>
-      <input type="text" name="author" placeholder="Autor" value=""><br>
-      <input type="text" name="package" placeholder="Pacote" value=""><br>
+      <input type="text" name="author" placeholder="Author" value=""><br>
+      <input type="text" name="package" placeholder="Package" value=""><br>
 
       <span>Utilizar extensão ".class"?</span>
       <label>
@@ -46,7 +46,7 @@
       <!-- Preenchido pelo usuario -->
     </div>
 
-    <br><button type="button" class="btnClass btnAdd">+ Classe</button>
+    <br><button type="button" class="btnClass btnAdd">+ Tabela</button>
 
     <br><br><br>
     <button class="btnClass btnBuildClasses">Gerar classes</button>
@@ -62,6 +62,8 @@
       <legend>Tabela</legend>
       <input type="text" name="tables[name][]" placeholder="Nome" value=""><br>
       <input type="text" name="tables[description][]" placeholder="Descrição" value=""><br>
+      
+      <br><button type="button" class="btnClass btnRemove">- Tabela</button>
     </fieldset>
   </div>
   
